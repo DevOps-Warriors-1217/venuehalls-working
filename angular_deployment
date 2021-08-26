@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-deployment
+  namespace: vedika
+spec:
+  selector:
+    matchLabels:
+      app: angular
+  replicas: 4 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: angular
+    spec:
+      containers:
+      - name: angular
+        image: shivastunts/vedika-angular-testing-fullcode:v1
+        ports:
+        - containerPort: 4200
+

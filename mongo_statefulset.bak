@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+  namespace: vedika
+spec:
+  serviceName: mongodb
+  replicas: 5
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+        replicaset: rs0
+        selector: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo
+        command:
+            - "mongod"
+            - "--bind_ip"
+            - "0.0.0.0"
+            - "--replSet"
+            - "rs0"
+        ports:
+            - containerPort: 27017
+       # env:
+        #  - name: MONGO_INITDB_ROOT_USERNAME
+         #   value: suntech
+         # - name: MONGO_INITDB_ROOT_PASSWORD
+         #   value: suntech@2020
