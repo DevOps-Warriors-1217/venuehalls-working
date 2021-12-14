@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+  namespace: venuehalls
+spec:
+  serviceName: mongo-service
+  replicas: 5
+  selector:
+    matchLabels:
+      role: mongo
+  template:
+    metadata:
+      labels:
+        role: mongo
+        replicaset: rs0
+    spec:
+      #terminationGracePeriodSeconds: 10
+      containers:
+        - name: mongo-container
+          image: shivastunts/venue-halls-mongo-data:functionhalls-with-out-variables
+          command:
+            - "mongod"
+            - "--bind_ip"
+            - "0.0.0.0"
+            - "--replSet"
+            - "rs0"
+          ports:
+            - containerPort: 27017
+          

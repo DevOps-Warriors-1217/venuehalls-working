@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-deployment
+  namespace: venuehalls
+spec:
+  selector:
+    matchLabels:
+      app: service
+  replicas: 4 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: service
+    spec:
+      containers:
+      - name: service
+        image: shivastunts/venue_halls:mongoipvariable
+        ports:
+        - containerPort: 8057
+        env:
+        - name: mongo_ip
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: mongo_ip

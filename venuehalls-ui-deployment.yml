@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-deployment
+  namespace: venuehalls
+spec:
+  selector:
+    matchLabels:
+      app: ui
+  replicas: 4 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: ui
+    spec:
+      containers:
+      - name: ui
+        image: shivastunts/venuehalls-ui:with-entrypoint
+        ports:
+        - containerPort: 4200
+        

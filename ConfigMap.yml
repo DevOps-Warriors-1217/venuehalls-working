@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: my-config
+  namespace: venuehalls
+data:
+  mongo_ip: 100.96.1.3

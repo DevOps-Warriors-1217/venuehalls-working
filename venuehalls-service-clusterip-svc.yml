@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-svc
+  namespace: venuehalls
+  labels:
+    app: service
+spec:
+  ports:
+  - port: 8057
+    protocol: TCP
+    targetPort: 8057
