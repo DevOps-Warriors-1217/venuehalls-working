@@ -1,0 +1,33 @@
+####Docker compose file in single docker instance
+
+version: "3"
+
+services:
+  # FUNCTIONHALLS-BACKEND
+  backend:
+    build:
+      context: ./functionhalls-backend
+      dockerfile: Dockerfile
+    ports:
+      - 8057:8057
+    depends_on:
+      - mongodb
+
+  # FUNCTIONHALLS-FRONTEND
+  frontend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
+    depends_on:
+      - backend
+
+  # DATA-BASE
+  mongodb:
+    image : mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - /opt/database:/data/db
