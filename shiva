@@ -1,0 +1,15 @@
+node{ 
+    stage ('bankett scm checkout'){
+    git credentialsId: 'git-creds', url: 'https://github.com/shivadeva/venuehalls-working.git'
+    }
+    
+    stage ('gradle build'){
+    def gradleHome = tool name: 'gradle', type: 'gradle'
+    defgradleCMD = "${gradleHome}/bin/gradle"
+    sh "${graldeCMD} clean build"
+    }
+    
+    stage ('running the artifact'){
+    sh " java -jar /var/lib/jenkins/workspace/bankettsaalz-shiva/build/libs/*.jar"
+    }
+}
